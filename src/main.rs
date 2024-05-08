@@ -21,7 +21,7 @@ fn main() {
         .listen(Transport::Ws, websocket_address)
         .unwrap();
 
-    println!("Listening on {} and {}", websocket_address, udp_address);
+    println!("Listening on ws://{} and UDP {}", websocket_address, udp_address);
 
     let endpoints = Endpoints::new();
 
