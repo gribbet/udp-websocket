@@ -6,19 +6,31 @@ use message_io::network::{Endpoint, NetEvent, Transport};
 use message_io::node::{self};
 use std::ops::Sub;
 
+use clap::Parser;
+
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[clap(index = 1, default_value = "0.0.0.0:8080")]
+    websocket_address: String,
+
+    #[clap(index = 2, default_value = "0.0.0.0:14550")]
+    udp_address: String,
+}
+
 fn main() {
-    let websocket_address = "0.0.0.0:8080";
-    let udp_address = "0.0.0.0:14550";
+
+    let Args { websocket_address, udp_address } = Args::parse();
 
     let (handler, listener) = node::split::<()>();
 
     handler
         .network()
-        .listen(Transport::Udp, udp_address)
+        .listen(Transport::Udp, udp_address.clone())
         .unwrap();
     handler
         .network()
-        .listen(Transport::Ws, websocket_address)
+        .listen(Transport::Ws, websocket_address.clone())
         .unwrap();
 
     println!("Listening on ws://{} and UDP {}", websocket_address, udp_address);
