@@ -1,0 +1,7 @@
+[package]
+edition = "2021"
+name = "udp-websocket"
+version = "0.1.0"
+
+[dependencies]
+message-io = "0.17"
