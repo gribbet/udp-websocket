@@ -4,5 +4,5 @@ name = "udp-websocket"
 version = "0.1.0"
 
 [dependencies]
-clap = { version = "4.5.4", features = ["derive"] }
-message-io = "0.17"
+clap = { version = "4.5", features = ["derive"] }
+message-io = "0.18"
